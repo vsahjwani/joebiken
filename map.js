@@ -195,14 +195,21 @@ map.on('load', async () => {
     .enter()
     .append('circle')
     .attr('r', d => radiusScale(d.totalTraffic)) // Radius based on traffic
-    .attr('fill', 'steelblue') // Circle fill color
     .attr('stroke', 'white') // Circle border color
     .attr('stroke-width', 1) // Circle border thickness
     .attr('opacity', 0.8) // Circle opacity
     .style('pointer-events', 'auto') // Enable pointer events for tooltips
-    .style('--departure-ratio', (d) =>
-        stationFlow(d.departures / d.totalTraffic),
-      )
+    .style('--color-departures', 'steelblue') // CSS custom property for departure color
+    .style('--color-arrivals', 'darkorange') 
+    .style('--departure-ratio', d => {
+        // Update departure ratio for color mixing
+        return d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
+      })
+    .style(--color, d => {
+        const ratio = d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
+        return `color-mix(in oklch, steelblue ${ratio * 100}%, darkorange)`;
+      })
+    .style('fill', 'var(--color)')
     .each(function (d) {
       // Add <title> for browser tooltips
       d3.select(this)
@@ -248,6 +255,12 @@ map.on('load', async () => {
       .attr('r', (d) => radiusScale(d.totalTraffic))
       .style('--departure-ratio', (d) =>
         stationFlow(d.departures / d.totalTraffic))
+      .style('--color', d => {
+        // Update color mix based on new departure ratio
+        const ratio = d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
+        return `color-mix(in oklch, steelblue ${ratio * 100}%, darkorange)`;
+      })
+      .style('fill', 'var(--color)')
       .each(function (d) {
         // Update tooltips with new traffic data
         d3.select(this).select('title')
