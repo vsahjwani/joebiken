@@ -5,6 +5,15 @@ console.log('Mapbox GL JS Loaded:', mapboxgl);
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidnNhaGp3YW5pIiwiYSI6ImNtYXltZzZ2bjA3djEycW9qeWRpd2FoYTEifQ.W8KC1oYsbEDimvmyFeNIWQ';
 
+// Global variables
+let timeFilter = -1; // Global time filter variable
+
+// Global helper function to format time
+function formatTime(minutes) {
+  const date = new Date(0, 0, 0, 0, minutes); // Set hours & minutes
+  return date.toLocaleString('en-US', { timeStyle: 'short' }); // Format as HH:MM AM/PM
+}
+
 // Initialize the map
 const map = new mapboxgl.Map({
   container: 'map', // ID of the div where the map will render
@@ -122,9 +131,9 @@ map.on('load', async () => {
   }
 
   const radiusScale = d3
-  .scaleSqrt()
-  .domain([0, d3.max(stations, (d) => d.totalTraffic)])
-  .range([0, 25]);
+    .scaleSqrt()
+    .domain([0, d3.max(stations, (d) => d.totalTraffic)])
+    .range([0, 25]);
 
   // Create circles for each station
   const circles = svg
@@ -162,4 +171,29 @@ map.on('load', async () => {
   map.on('zoom', updatePositions);
   map.on('resize', updatePositions);
   map.on('moveend', updatePositions);
+
+  // Time filter elements selection
+  const timeSlider = document.getElementById('timeSlider');
+  const selectedTime = document.getElementById('timeDisplay');
+  const anyTimeLabel = document.getElementById('anyTime');
+
+  // Function to update the time display
+  function updateTimeDisplay() {
+    timeFilter = Number(timeSlider.value); // Get slider value
+
+    if (timeFilter === -1) {
+      selectedTime.textContent = ''; // Clear time display
+      anyTimeLabel.style.display = 'block'; // Show "(any time)"
+    } else {
+      selectedTime.textContent = formatTime(timeFilter); // Display formatted time
+      anyTimeLabel.style.display = 'none'; // Hide "(any time)"
+    }
+
+    // Trigger filtering logic which will be implemented in the next step
+    console.log('Time filter updated to:', timeFilter);
+  }
+
+  // Bind slider input event and initialize
+  timeSlider.addEventListener('input', updateTimeDisplay);
+  updateTimeDisplay(); // Initialize display
 });
