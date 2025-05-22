@@ -7,6 +7,7 @@ body {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  background-color: lightblue;
 }
 
 #map {
@@ -25,7 +26,7 @@ body {
 }
 
 header {
-  background: rgb(114, 169, 164);
+  background: whitesmoke;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
   padding: 20%;
