@@ -187,7 +187,7 @@ map.on('load', async () => {
     .range([0, 25]);
 
 
-    let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
+  let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
   // Create circles for each station with key function for efficient updates
   circles = svg
     .selectAll('circle')
@@ -202,9 +202,9 @@ map.on('load', async () => {
     .style('--color-departures', 'steelblue') // CSS custom property for departure color
     .style('--color-arrivals', 'darkorange') 
     .style('--departure-ratio', (d) =>
-        stationFlow(d.departures / d.totalTraffic),
+        stationFlow(d.departures / d.totalTraffic)
       )
-    .style(--color, d => {
+    .style('--color', d => {
         const ratio = d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
         return `color-mix(in oklch, steelblue ${ratio * 100}%, darkorange)`;
       })
