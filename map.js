@@ -201,10 +201,9 @@ map.on('load', async () => {
     .style('pointer-events', 'auto') // Enable pointer events for tooltips
     .style('--color-departures', 'steelblue') // CSS custom property for departure color
     .style('--color-arrivals', 'darkorange') 
-    .style('--departure-ratio', d => {
-        // Update departure ratio for color mixing
-        return d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
-      })
+    .style('--departure-ratio', (d) =>
+        stationFlow(d.departures / d.totalTraffic),
+      )
     .style(--color, d => {
         const ratio = d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
         return `color-mix(in oklch, steelblue ${ratio * 100}%, darkorange)`;
