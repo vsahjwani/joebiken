@@ -30,6 +30,7 @@ header {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
   padding: 20%;
+  height: 200;
   gap: 1em;
   position:absolute;
   top: 0;
@@ -65,7 +66,7 @@ h1 {
   width: 200px;
   height: 6px;
   border-radius: 3px;
-  background: #e9ecef;
+  background: #85888b;
   outline: none;
   appearance: none;
   cursor: pointer;
