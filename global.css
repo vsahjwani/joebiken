@@ -25,14 +25,12 @@ body {
 }
 
 header {
-  background: white;
-  padding: 1rem 2rem;
+  background: rgb(114, 169, 164);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
   gap: 1em;
-  align-items: baseline;
-  position: relative;
-  z-index: 1000;
+  position:absolute;
+  top: 0;
 }
 
 h1 {
@@ -111,10 +109,4 @@ h1 {
 
 .hidden {
   display: none !important;
-}
-
-#map {
-  height: calc(100vh - 120px);
-  width: 100%;
-  position: relative;
 }
