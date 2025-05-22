@@ -28,6 +28,7 @@ header {
   background: rgb(114, 169, 164);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
+  padding: 20%;
   gap: 1em;
   position:absolute;
   top: 0;
@@ -105,8 +106,4 @@ h1 {
   font-style: italic;
   color: #6c757d;
   font-weight: normal;
-}
-
-.hidden {
-  display: none !important;
 }

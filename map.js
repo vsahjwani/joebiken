@@ -261,7 +261,9 @@ map.on('load', async () => {
       anyTimeLabel.style.display = 'block'; // Show "(any time)"
     } else {
       selectedTime.textContent = formatTime(timeFilter); // Display formatted time
+      selectedTime.classList.remove('hidden'); // Show time display
       anyTimeLabel.style.display = 'none'; // Hide "(any time)"
+      anyTimeLabel.classList.add('hidden'); // Ensure it's hidden
     }
 
     // Call updateScatterPlot to reflect the changes on the map
