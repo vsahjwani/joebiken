@@ -121,17 +121,31 @@ map.on('load', async () => {
     return { cx: x, cy: y }; // Return as object for use in SVG attributes
   }
 
+  const radiusScale = d3
+  .scaleSqrt()
+  .domain([0, d3.max(stations, (d) => d.totalTraffic)])
+  .range([0, 25]);
+
   // Create circles for each station
   const circles = svg
     .selectAll('circle')
     .data(stations)
     .enter()
     .append('circle')
-    .attr('r', 5) // Radius of the circle
+    .attr('r', d => radiusScale(d.totalTraffic)) // Radius of the circle
     .attr('fill', 'steelblue') // Circle fill color
     .attr('stroke', 'white') // Circle border color
     .attr('stroke-width', 1) // Circle border thickness
-    .attr('opacity', 0.8); // Circle opacity
+    .attr('opacity', 0.8) // Circle opacity
+    .style('pointer-events', 'auto') // Enable pointer events for tooltips
+    .each(function (d) {
+      // Add <title> for browser tooltips
+      d3.select(this)
+        .append('title')
+        .text(
+          `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`,
+        );
+    });
 
   // Function to update circle positions
   function updatePositions() {
