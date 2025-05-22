@@ -111,8 +111,8 @@ h1 {
 }
 
 #map circle{
-  --color-departures: steelblue;
-  --color-arrivals: darkorange;
+  --color-departures: rgb(0, 170, 255);
+  --color-arrivals: rgb(255, 130, 67);
   --color: color-mix(in oklch,
     var(--color-departures) calc(100% * var(--departure-ratio)), var(--color-arrivals));
     fill: var(--color);
@@ -133,8 +133,8 @@ h1 {
 }
 
 .legend > div {
-  --color-departures: steelblue;
-  --color-arrivals: darkorange;
+  --color-departures: rgb(0, 170, 255);
+  --color-arrivals: rgb(255, 130, 67);
   --color: color-mix(
       in oklch,
       var(--color-departures) calc(100% * var(--departure-ratio)),

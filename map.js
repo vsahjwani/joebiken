@@ -199,14 +199,14 @@ map.on('load', async () => {
     .attr('stroke-width', 1) // Circle border thickness
     .attr('opacity', 0.8) // Circle opacity
     .style('pointer-events', 'auto') // Enable pointer events for tooltips
-    .style('--color-departures', 'steelblue') // CSS custom property for departure color
-    .style('--color-arrivals', 'darkorange') 
+    .style('--color-departures', 'rgb(0, 170, 255)') // CSS custom property for departure color
+    .style('--color-arrivals', 'rgb(255, 130, 67)') 
     .style('--departure-ratio', (d) =>
         stationFlow(d.departures / d.totalTraffic)
       )
     .style('--color', d => {
         const ratio = d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
-        return `color-mix(in oklch, steelblue ${ratio * 100}%, darkorange)`;
+        return `color-mix(in oklch, rgb(0, 170, 255) ${ratio * 100}%, rgb(255, 130, 67))`;
       })
     .style('fill', 'var(--color)')
     .each(function (d) {
@@ -257,7 +257,7 @@ map.on('load', async () => {
       .style('--color', d => {
         // Update color mix based on new departure ratio
         const ratio = d.totalTraffic > 0 ? d.departures / d.totalTraffic : 0;
-        return `color-mix(in oklch, steelblue ${ratio * 100}%, darkorange)`;
+        return `color-mix(in oklch, rgb(0, 170, 255) ${ratio * 100}%, rgb(255, 130, 67))`;
       })
       .style('fill', 'var(--color)')
       .each(function (d) {
